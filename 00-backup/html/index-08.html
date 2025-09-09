@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+   <title>컴포즈커피</title>
+
+   <meta charset="utf-8">
+   <meta name="generator" content="windows notepad">
+   <meta name="keywords" content="프론트엔드 디자인,웹디자인,uxui디자인,uiux디자인,웹퍼블리셔,html,css,포토샵,일러스트,피그마,javascript,jquery,포트폴리오">
+   <meta name="description" content="안녕하세요! 프론트엔드 디자이너 입사지원자 강혜경입니다. 프로토타입 포트폴리오 웹사이트입니다.">
+   
+   
+   <style>
+       *{ margin:0; padding:0; }
+	   body{
+	       color: #111;
+           font-family: "맑은 고딕", MalgunGothic, sans-serif;
+	   }
+	   li{list-style:none;}
+	   
+       #wrapper {
+	        width:1600px;
+			/*height:1000px;*/
+			margin:0 auto;
+			/*background:pink; */
+		}
+		
+		header{
+		    width:1600px;
+			height:90px;
+			margin:0 auto;
+			padding:10px 80px;
+			box-sizing: border-box;
+			/*background: white;*/
+			
+			position: relative;   /* 추가 */
+            z-index: 10;          /* 추가 */
+			
+			position: fixed;     /* 문서 흐름에서 빠지게돼서 동영상이 위까지 보임 */ 
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+			
+			border-bottom: 1px solid rgba(255,255,255,0.3);
+			
+			
+		}
+		
+		h1{ 
+		   width:300px;
+		   height:70px;
+		   
+		   float:left; 
+		   
+		}
+		h1 img{
+		    width:300px;
+		    height:70px;
+		} 
+		
+		.gnb{
+		    width:650px;
+			height:70px;
+			margin:-5px auto;
+			float:right;
+			
+			
+			
+		}
+		
+		.gnb ul{ 
+		    display:flex;
+            align-items:center;
+            gap:20px;         /* 항목 간격 */
+			width:630px;
+            height:40px;      /* 기존 값 유지 */
+			
+			/* margin:15px auto; 아 이걸로 위치 잡으면 되네 */
+			margin-bottom:15px;
+			margin-top:15px;
+			margin-left:-85px;
+			
+	
+			
+			
+		}
+		.gnb ul li{
+		     display:block;    /* inline-block 필요 없음 */
+             height:auto;
+             margin:0;
+			 
+			 font-size:20px;
+			 font-weight:bold;
+			 
+			
+		}
+		     
+		.gnb ul li a{
+		    text-decoration:none;
+			color:white;
+			padding:8px 12px;
+			
+			/*background:pink;*/
+			transition:0.1s;
+		}
+		
+		.gnb ul li a:hover{
+		    color:#fdd22b;
+			transition:0.1s;
+		}
+		
+		.gnb ul li a::after{
+          content:"";
+          display:inline-block;
+          width:1px;                       /* 막대 두께 */
+          height:18px;                     /* 막대 길이 */
+          background:rgba(255,255,255,0.8);      /* 투명도 있는 흰색 막대 */
+          margin-left:20px;                /* 텍스트와 간격 */
+          vertical-align:middle;           /* 세로 정렬 보정 */
+                     /* 필요시 살짝 투명 */
+        }
+
+.gnb ul li:nth-child(-n+3) a::after{
+   display:none;
+}
+
+/********** 2뎁스 테스트 *********/
+
+/********** 드롭다운 메뉴 **********/
+
+/* 1depth 메뉴 기본 */
+.gnb { position: relative; }
+.gnb > .menu {
+  display: flex;              /* 상단 메뉴만 가로 배치 */
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+}
+.menu > li { position: relative; }
+.menu > li > a {
+  display: inline-block;
+  padding: 10px 6px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  color: #1a3f8b;
+  text-decoration: none;
+}
+
+/* 드롭다운 박스 */
+.dropdown {
+  position: absolute;
+  left: 50% + translateX(-50%)
+  top: calc(100% + 14px);        /* 부모 메뉴 아래 */
+  transform: translate(-50%, -8px); /* 살짝 위에서 등장 */
+
+   display: flex;              /* block → flex */
+   flex-direction: column;     /* 세로로 배치 */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  min-width: 180px;              /* 최소 폭 */
+  width: max-content;            /* 글자 길이에 맞춰 */
+  height: auto;                  /* 항목 개수만큼 자동 */
+  padding: 8px 0;
+
+  border-radius: 12px;
+  background: rgba(0, 102, 51, 0.92); /* 컴포즈 초록 + 투명도 */
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+
+  transition: opacity 0.18s ease, transform 0.22s ease;
+  z-index: 50;
+}
+
+/* 드롭다운 위쪽 다이아 화살표 */
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background: rgba(0, 102, 51, 0.92);
+  transform: translateX(-50%) rotate(45deg);
+  border-radius: 3px;
+}
+
+/* 드롭다운 항목 (세로 리스트) */
+.dropdown li { display: block; }
+.dropdown a {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.dropdown a:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* 드롭다운 열기 상태 */
+.has-sub:hover .dropdown,
+.has-sub:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+
+
+/********* 2뎁스 테스트 끝 *******/
+
+/****** 주문버튼 ******/
+.order .btn-order{
+  display:inline-block;
+  min-width:100px;
+  padding:12px 10px;
+  border-radius:9999px;
+  background:#EAA800;
+  color:#fff;
+  border:2px solid transparent;
+  font-size:18px;
+  font-weight:800;
+  line-height:1.2;
+  text-decoration:none;
+  
+  text-align:center;
+  position:relative;
+  top:5px;
+  left:956px;
+}
+
+/* 기본은 영문만 표시 */
+.order .btn-order .txt-en{ display:inline; }
+.order .btn-order .txt-kr{ display:none; }
+
+/* 호버: 배경 흰색, 글자/테두리 = #EAA800, 텍스트는 한글로 */
+.order .btn-order:hover{
+  background:#fff;
+  color:#EAA800;
+  border-color:#EAA800;
+  
+  text-align:center;
+}
+
+.order .btn-order:hover .txt-en{ display:none; }
+.order .btn-order:hover .txt-kr{ display:inline; }
+
+/****** 주문버튼 끝 *********/
+
+
+		
+		
+		#slide1{ 
+		    width:100%;
+			height:900px; overflow:hidden;
+			/*background:skyblue;*/
+			
+			 
+		}
+		
+		.intro_Video{ width:100%; height:100%; /*background:cyan; */}
+		.intro_Video video{ width:100%; height:100%;  /*최적수치찾기 */ /*background:skyblue;*/ display:block; object-fit:cover; 
+         
+		}
+		
+		#slide1 .contents_wrap{ position:relative; }
+        #slide1 .text_box{
+		       width:700px;
+			   height:400px;
+			   margin:0 auto;
+			   background:pink;
+			   opacity:0.3;
+			   
+			   position:absolute;
+			   z-index:10;
+			   top:100px;
+			   left: 450px;
+			   
+		}
+	    #slide1 .link{
+		      width:600px;
+			   height:250px;
+			   margin:0 auto;
+			   background:skyblue;
+			   
+			   position:absolute;
+			   z-index:11;
+			   top:300px;
+			   left: 500px;
+			   
+		}
+			 
+		
+		section{
+		    width:100%;
+			height:500px;
+			background:orange;
+			margin-bottom:5px; /* 마지막에 지울 예정 */
+		}
+		
+		#slide3, #slide4{
+		     padding:100px 350px;
+			 box-sizing: border-box;
+		}
+		
+		footer{
+		    width:100%;
+			height:150px;
+		}
+		
+		
+   </style>
+  </head>
+  <body>
+      <div id="wrapper">
+	  
+	  
+	      <header>
+		      <div class="contents_wrap">
+			      <h1><a href="#"><img src="./images/header_logo-removebg-preview.png" alt="컴포즈 로고"></a></h1>
+				  
+				  <nav class="gnb">
+				      <ul class="menu">
+					      <li class="has-sub"><a href="#">BRAND</a>
+						       <ul class="dropdown">
+                               <li><a href="#">ABOUT US</a></li>
+                               <li><a href="#">컴포즈 원두</a></li>
+                               </ul>
+						  </li>
+					      <li class="has-sub"><a href="#">FRANCHISE</a>
+						       <ul class="dropdown">
+                               <li><a href="#">가맹문의</a></li>
+                               <li><a href="#">창업비용</a></li>
+                               <li><a href="#">가맹절차</a></li>
+                               <li><a href="#">창업스토리</a></li>
+                               <li><a href="#">제휴 및 제안</a></li>
+                               </ul>
+						  </li>
+					      <li class="has-sub"><a href="#">MENU</a>
+						       <ul class="dropdown">
+                               <li><a href="#">컴포즈 콤보</a></li>
+                               <li><a href="#">커피/더치</a></li>
+                               <li><a href="#">논커피 라떼</a></li>
+                               <li><a href="#">프라페/스무디</a></li>
+                               <li><a href="#">밀크쉐이크</a></li>
+                               <li><a href="#">에이드/주스</a></li>
+                               <li><a href="#">티</a></li>
+                               <li><a href="#">디저트</a></li>
+                               <li><a href="#">MD상품</a></li>
+                               </ul>
+						  </li>
+					      <li class="has-sub"><a href="#">STORE</a>
+						       <ul class="dropdown">
+                               <li><a href="#">매장찾기</a></li>
+                               <li><a href="#">컴포즈마켓</a></li>
+                               <li><a href="#">고객의 소리</a></li>
+                               </ul>
+						  </li>
+						  <!-- <li><a href="#">NEWS</a></li> -->
+					      
+					  </ul>
+				  </nav><!-- .gnb end -->
+				  
+				 <!--  <nav class="utility">
+				      <ul>
+					      <li><a href=#>LOGIN</a></li>
+					      <li><a href=#>JOIN</a></li>
+					      <li><a href=#>CART</a></li>
+					  </ul>
+				  </nav>.utility end -->
+				  
+				  <div class="order">
+                    <a href="#" class="btn-order">
+                      <span class="txt-en">Order Now</span>
+                      <span class="txt-kr">주문하기</span>
+                    </a>
+                 </div>
+			  </div><!-- contents_wrap end -->
+		  </header><!-- header end -->
+		  
+		  <section id="slide1">
+             <div class="contents_wrap">		  
+			    <div class="intro_Video">
+			        <video autoplay muted loop class="bg_video" poster="./video/black_bg.webp">
+                        <source src="./video/V_COMPOSED_FULL(8MB).mp4" type="video/mp4" >	 
+	                </video>
+			     </div><!-- .intro_Video -->
+						
+			  <div class="text_box">
+				      텍스트 삽입예정
+			  </div>
+				  
+			   <div class="link">
+				      <ul>
+					      <li>sns링크</li>
+					      <li>shop링크</li>
+					      <li>contact링크</li>
+					  </ul>
+			   </div><!-- .link end -->
+			 </div><!-- contents_wrap end -->
+		  </section><!-- #slide1 end -->
+		  
+		  <section id="slide2">
+		    <div class="contents_wrap">
+		      <div class="gallery_wrap">
+	              <ul class="slide_gallery">
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+	             </ul>
+             </div><!-- .gallery_wrap end -->
+			 
+			 <img src="" alt="" class="icon_left">화살표 아이콘(왼쪽)
+			 <img src="" alt="" class="icon_right">화살표 아이콘(오른쪽)
+		   </div> <!-- .contents_wrap end -->
+		  </section><!-- #slide2 end -->
+		  
+		  <section id="slide3">
+		      <div class="contents_wrap">
+			      <div class="text_box">
+				      텍스트 삽입예정
+				  </div><!-- .text_box end -->
+				  
+				  <div class="img_box">
+				      <ul class="slide_gallery">
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+		                 <li>이미지 삽입예정</li>
+					  </ul>
+				  </div><!-- .img_box end -->
+			  </div><!-- contents_wrap end -->
+		  </section><!-- #slide3 end -->
+		  
+		  <section id="slide4">
+		      <div class="contents_wrap">
+			      <div class="text_box_left">
+				      텍스트 삽입예정
+				  </div><!-- .text_box_left end -->
+				  
+				  <div class="text_box_right">
+				      <ul>
+					      <li>글 삽입예정</li>
+					      <li>글 삽입예정</li>
+					      <li>글 삽입예정</li>
+					      <li>글 삽입예정</li>
+					  </ul>
+				  </div><!-- .text_box_right end -->
+			  </div><!-- contents_wrap end -->
+		  </section><!-- #slide4 end -->
+		  
+		  <footer>
+		      <div class="contents_wrap">
+			     <div class="copyright_box">
+				     copyright_box
+				 </div><!-- .copyright_box end -->
+				 
+				 <span><a href="#">이용약관</a></span>
+				 <span><a href="#">개인정보</a></span>
+				 
+				 <div class="icon_box">
+				     icon_box
+				 </div><!-- .icon_box end -->
+			  </div><!-- contents_wrap end -->
+		  </footer><!-- footer end -->
+	  
+	
+	  </div><!-- #wrapper end -->
+  </body>
+</html>
