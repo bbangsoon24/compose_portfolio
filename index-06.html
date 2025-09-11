@@ -72,147 +72,72 @@
       }
 
       /* GNB (1뎁스) */
-      .gnb {
-        width: 60%;
-        height: 90px;
-        float: left;
-
-        position: relative;
-      }
-
-      .gnb > .menu {
+      /* 기본 레이아웃 */
+      .menu {
         display: flex;
+        gap: 40px;
         justify-content: center;
         align-items: center;
-        gap: 20px;
-
-        width: 100%;
-        height: 90px;
-
-        margin: 0 auto;
+        height: 64px;
+        list-style: none;
       }
-
-      .menu > li {
-        position: relative;
-        margin-bottom: 5px;
-
-        width: 120px;
-
-        text-align: center;
-      }
-      .menu > li > a {
-        display: inline-block;
-        padding: 10px 6px;
-        font-size: 18px;
-        font-weight: bold;
+      .menu li {
         color: #fff;
-        text-decoration: none;
-        transition: 0.15s;
-      }
-      .menu > li > a:hover {
-        color: #fdd22b;
-
-        transition: 0.2s;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 8px 4px;
       }
 
-      .menu .change .txt-en {
-        display: inline; /* 얘가 기본화면 */
-      }
-
-      .menu .change:hover .txt-en {
-        display: none; /* 얘가 변한 화면 */
-      }
-
-      .menu .change .txt-kr {
-        display: none; /* 얘가 기본화면 */
-      }
-
-      .menu .change:hover .txt-kr {
-        display: inline; /* 얘가 변한 화면 */
-      }
-
-      .menu .change:hover {
-        color: #fdd22b;
-      }
-
-      /* 드롭다운 (2뎁스) — 갭 제거! */
-      .dropdown {
+      /* 메가박스: 기본 숨김 */
+      .mega {
         position: absolute;
-        left: 50%;
-        top: 100%; /* 부모 바로 아래에 밀착 */
-        transform: translate(-50%, -10px); /* 살짝 위에서 등장(시각효과) */
-
-        display: inline-flex;
-        flex-direction: column; /* 항목은 세로로 줄줄이 배치!!!! 이게 핵심이네 */
-        align-items: stretch;
-
+        left: 0;
+        top: 100%;
+        width: 100%;
         opacity: 0;
         visibility: hidden;
-        pointer-events: none;
-
-        width: auto;
-        /*height: auto;*/
-        padding: 6px 0;
-        border-radius: 12px;
-        background: white; /* 배경색 */
-        /*box-shadow:0 12px 28px rgba(0,0,0,1);*/
-        transition: opacity 0.18s ease, transform 0.18s ease;
-        z-index: 50;
-
-        max-height: 0; /* 숫자여야 애니메이션 가능 */
-        overflow: hidden; /* 접힐 때 내용 잘라내기 */
-        transition: max-height 0.7s ease, opacity 0.5s ease, transform 0.5s ease;
+        transform: translateY(-8px);
+        transition: 0.2s ease;
       }
-
-      /* 위쪽 다이아(시각 간격 역할만 하고 실제 갭은 없음) */
-      .dropdown::before {
-        content: "";
-        position: absolute;
-        top: -8px;
-        left: 50%;
-        width: 16px;
-        height: 16px;
-        background: white;
-        transform: translateX(-50%) rotate(45deg);
-        border-radius: 3px;
+      .mega .inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        background: linear-gradient(180deg, #2a3f6e 0%, #1f2f56 100%);
+        border-radius: 16px;
       }
-
-      .dropdown li {
+      .mega .col a {
         display: block;
-      }
-      .dropdown a {
-        display: block;
-        padding: 14px 16px;
-        color: #333;
+        padding: 8px 10px;
+        color: #fff;
         text-decoration: none;
-        white-space: nowrap;
-        font-size: 17px;
-        font-weight: bold;
       }
-      .dropdown a:hover {
-        background-color: rgba(253, 210, 43, 0.5);
+      .mega .col a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
       }
 
-      /* 열림 상태 조건 */
-      .has-sub:hover .dropdown
-         /*.has-sub:focus-within .dropdown // 키보드, 모바일 대응*/
-      {
-        opacity: 1; /*완전히 보이게 만든다*/
-        visibility: visible; /*화면에서 보이도록 설정*/
-        pointer-events: auto;
-        transform: translate(-50%, 0);
+      /* hover 시 열림 */
+      .gnb:hover .mega {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
       }
 
-      .has-sub:hover .dropdown,
-      .has-sub .dropdown:hover {
-        /* ...위에서 설명한 보이기 속성들... */
-        max-height: 480px; /* 컨텐츠보다 넉넉히 큰 값 */
+      /* li ↔ col 매칭 (옵션) */
+      .mega .col {
+        opacity: 0.5;
+        transition: 0.2s;
       }
-
-      /* [열림 상태 조건 소스 해석]
-
-      “.has-sub 메뉴 위에 마우스를 올리면, 안에 있는 .dropdown 메뉴가 보이도록(opacity/visibility), 클릭 가능하도록(pointer-events), 그리고 원래 자리로(transform) 이동하도록” 만든 코드예요.
-      */
+      .gnb:has(.menu > li:nth-child(1):hover) .mega .col:nth-child(1),
+      .gnb:has(.menu > li:nth-child(2):hover) .mega .col:nth-child(2),
+      .gnb:has(.menu > li:nth-child(3):hover) .mega .col:nth-child(3),
+      .gnb:has(.menu > li:nth-child(4):hover) .mega .col:nth-child(4) {
+        opacity: 1;
+      }
 
       /* 주문 버튼 (헤더 우측 정중앙) */
 
@@ -788,100 +713,42 @@
           </h1>
 
           <nav class="gnb">
+            <!-- 1뎁스 -->
             <ul class="menu">
-              <li class="has-sub">
-                <a href="#" class="change">
-                  <span class="txt-en">BRAND</span>
-                  <span class="txt-kr">&nbsp;브랜드&nbsp;</span>
-                </a>
-                <ul class="dropdown">
-                  <li>
-                    <a
-                      href="#"
-                      onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
-                      >ABOUT US</a
-                    >
-                  </li>
-                  <li><a href="#">컴포즈 원두</a></li>
-                </ul>
-              </li>
-              <li class="has-sub">
-                <a href="#" class="change">
-                  <span class="txt-en">FRANCHISE</span>
-                  <span class="txt-kr">&nbsp;프렌차이즈&nbsp;</span>
-                </a>
-                <ul class="dropdown">
-                  <li>
-                    <a
-                      href="#"
-                      onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
-                      >가맹문의</a
-                    >
-                  </li>
-                  <li><a href="#">창업비용</a></li>
-                  <li><a href="#">가맹절차</a></li>
-                  <li><a href="#">창업스토리</a></li>
-                  <li><a href="#">제휴 및 제안</a></li>
-                </ul>
-              </li>
-              <li class="has-sub">
-                <a href="#" class="change">
-                  <span class="txt-en">MENU</span>
-                  <span class="txt-kr">&nbsp;&nbsp;메뉴&nbsp;&nbsp;</span>
-                </a>
-                <ul class="dropdown">
-                  <li>
-                    <a
-                      href="#"
-                      onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
-                      >컴포즈 콤보</a
-                    >
-                  </li>
-                  <li><a href="#">커피 · 더치</a></li>
-                  <li><a href="#">논커피 라떼</a></li>
-                  <li><a href="#">프라페 · 스무디</a></li>
-                  <li><a href="#">밀크쉐이크</a></li>
-                  <li><a href="#">에이드 · 주스</a></li>
-                  <li><a href="#">티</a></li>
-                  <li><a href="#">디저트</a></li>
-                  <li><a href="#">MD상품</a></li>
-                </ul>
-              </li>
-              <li class="has-sub">
-                <a href="#" class="change">
-                  <span class="txt-en">STORE</span>
-                  <span class="txt-kr">&nbsp;&nbsp;상점&nbsp;&nbsp;</span>
-                </a>
-                <ul class="dropdown">
-                  <li>
-                    <a
-                      href="#"
-                      onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
-                      >매장찾기</a
-                    >
-                  </li>
-                  <li><a href="#">컴포즈마켓</a></li>
-                  <li><a href="#">고객의 소리</a></li>
-                </ul>
-              </li>
-              <li class="has-sub">
-                <a href="#" class="change">
-                  <span class="txt-en">NEWS</span>
-                  <span class="txt-kr">&nbsp;&nbsp;뉴스&nbsp;&nbsp;</span>
-                </a>
-                <ul class="dropdown">
-                  <li>
-                    <a
-                      href="#"
-                      onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
-                      >공지사항</a
-                    >
-                  </li>
-                  <li><a href="#">NEWS</a></li>
-                  <li><a href="#">EVENTS</a></li>
-                </ul>
-              </li>
+              <li>BRAND</li>
+              <li>MENU</li>
+              <li>FRANCHISE</li>
+              <li>CONTACT</li>
             </ul>
+
+            <!-- 2뎁스 (메가영역) -->
+            <div class="mega">
+              <div class="inner">
+                <div class="col">
+                  <a href="#">ABOUT US</a>
+                  <a href="#">HISTORY</a>
+                  <a href="#">STORES</a>
+                  <a href="#">NEWS</a>
+                </div>
+                <div class="col">
+                  <a href="#">COFFEE</a>
+                  <a href="#">NON-COFFEE</a>
+                  <a href="#">DESSERT</a>
+                  <a href="#">SEASONAL</a>
+                </div>
+                <div class="col">
+                  <a href="#">INQUIRY</a>
+                  <a href="#">COST</a>
+                  <a href="#">PROCESS</a>
+                  <a href="#">STORY</a>
+                </div>
+                <div class="col">
+                  <a href="#">Q&A</a>
+                  <a href="#">PARTNERSHIP</a>
+                  <a href="#">RECRUIT</a>
+                </div>
+              </div>
+            </div>
           </nav>
 
           <div class="order">
