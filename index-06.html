@@ -60,6 +60,10 @@
         color: #111;
       }
 
+      header.scrolled .order-txt-en {
+        color: #111;
+      }
+
       h1 {
         width: 20%; /*자식의 크기 지정*/
         height: 90px;
@@ -876,15 +880,24 @@
 
           <div class="long_box">
             <div>
-              <p class="years"><strong>11</strong><span>년</span></p>
+              <p class="years">
+                <strong class="counter" data-target="11">0</strong
+                ><span>년</span>
+              </p>
               <p class="desc">함께한 시간</p>
             </div>
             <div>
-              <p class="number"><strong>2998</strong><span>개</span></p>
+              <p class="number">
+                <strong class="counter" data-target="2998">0</strong
+                ><span>개</span>
+              </p>
               <p class="desc">가맹점 수</p>
             </div>
             <div>
-              <p class="human"><strong>17,589,812</strong><span>명</span></p>
+              <p class="human">
+                <strong class="counter" data-target="17589812">0</strong
+                ><span>명</span>
+              </p>
               <p class="desc">컴포저 (App 누적 가입자)</p>
             </div>
           </div>
@@ -983,6 +996,24 @@
           header.classList.remove("scrolled");
         }
       });
+      function animateCounter(el) {
+        const target = +el.getAttribute("data-target"); // 목표 숫자
+        let current = 0;
+        const duration = 3000; // 전체 시간(ms)
+        const stepTime = 20; // 숫자 변경 간격(ms)
+        const increment = target / (duration / stepTime);
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = Math.floor(current).toLocaleString();
+        }, stepTime);
+      }
+
+      document.querySelectorAll(".counter").forEach(animateCounter);
     </script>
   </body>
 </html>
