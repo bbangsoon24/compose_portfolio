@@ -20,8 +20,8 @@
       * {
         margin: 0;
         padding: 0;
-		text-decoration:none;
-		color:#111;
+        text-decoration: none;
+        color: #111;
       }
       body {
         color: #111;
@@ -41,7 +41,7 @@
       header {
         width: 100%;
         height: 90px;
-		box-sizing: border-box;
+        box-sizing: border-box;
 
         position: fixed;
         top: 0;
@@ -50,58 +50,130 @@
         z-index: 100;
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         transition: background 0.4s ease, color 0.4s ease;
-		
-		display:grid;
-		grid-template-columns: 200px 1fr 200px;
-		align-items: center;
-      }
-	  
-	  h1{ 
-		background:pink;
-	  }
-	  
-	  h1 img{
-		display:block;
-	  }
-	  
-	  .gnb{
-		background:yellow;
-		
-		width:50%;
-		margin:0 auto;
-	    height:90px;
-	  }
-	  
-	  .gnb ul{
-		width:100%;
-		height:90px;
-		display:grid;
-		grid-template-columns: repeat(5, max-content);  /*내용너비*/
-		justify-content: space-evenly;  /*가로축*/
-		align-items: center; /*세로축 + 높이값 무조건 같이 써야함 */
-	  }
-	  
-	  .gnb ul li{
-		width:100%;
-		position:relative;
-	  }
-	  
-	 .mega-total{
-		width:100%;
-		height:200px;
-		background:pink;
-		
 
-	 }
-	  
-	  .order{
-		background:tan;
-	  }
-      
-	  
-	  
-	  
-	  /* 헤더 스크롤 */
+        display: grid;
+        grid-template-columns: 15% 70% 15%;
+        align-items: center;
+      }
+
+      h1 {
+        background: pink;
+      }
+
+      h1 img {
+        display: block;
+      }
+
+      .gnb {
+        background: yellow;
+
+        width: 100%;
+        margin: 0 auto;
+        height: 90px;
+      }
+
+      .gnb ul {
+        width: 80%;
+        height: 90px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(5, max-content); /*내용너비*/
+        justify-content: center; /*가로축*/
+        align-items: center; /*세로축 + 높이값 무조건 같이 써야함 */
+        gap: 30px;
+
+        background: #ddd;
+      }
+
+      .gnb ul li {
+        width: 100%;
+
+        /* background: black; */
+
+        position: relative;
+      }
+
+      .deapth1 > li {
+
+        position: relative; /* 2뎁스 위치 기준 */
+        padding: 12px 20px;
+      }
+
+      .deapth1 > li > .deapth2 {
+        display: none;
+        position: absolute;
+        top: 100%;   /* li 바로 밑 */
+        left: 0;
+        min-width: 180px;
+        background: #fff;
+        border: 1px solid #ddd;
+
+
+      }
+
+      .deapth1 > li:hover .deapth2 {
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+        z-index: 100;
+      }
+
+      .mega-total {
+        width: 100%;
+        height: 200px;
+        background: pink;
+        margin: 0 auto;
+
+        position: absolute;
+        left: 0;
+        right: 0;
+
+
+        display: grid;
+        grid-template-columns: repeat(5, max-content); /*내용너비*/
+        justify-content: center; /*가로축*/
+        align-items: center; /*세로축 + 높이값 무조건 같이 써야함 */
+        gap: 30px;
+      }
+
+      .mega-total .deapth2 {
+        width: 80%;
+        height: auto;
+        background: skyblue;
+        margin: 0 auto;
+
+        display: grid;
+        grid-template-rows: repeat(5, max-content);
+        gap: 30px;
+        justify-content: space-evenly;
+        align-items: center;
+
+        font-size: 12px;
+      }
+
+      /* .deapth2-wrap {
+        width: 70%;
+        height: auto;
+        background: orange;
+        margin: 0 auto;
+
+        display: grid;
+        grid-template-columns: repeat(5, max-content); /*내용너비*/
+        justify-content: center; /*가로축*/
+        align-items: center; /*세로축 + 높이값 무조건 같이 써야함 */
+        gap: 30px;
+      } */
+
+      .deapth2 a {
+        display: block;
+
+        background: #111;
+      }
+
+      .order {
+        background: tan;
+      }
+
+      /* 헤더 스크롤 */
       header.scrolled {
         background: rgba(255, 255, 255); /* 반투명 검정 */
         transition: background 0.4s ease, color 0.4s ease;
@@ -115,7 +187,6 @@
         color: #111;
       }
 
-      
       /* header end */
 
       /*aside 시작*/
@@ -617,90 +688,100 @@
   <body>
     <div id="wrapper">
       <header id="header">
-          <h1>
-            <a href="#"
-              ><img
-                class="logo"
-                src="./images/header_logo-removebg-preview.png"
-                alt="컴포즈 로고"
-            /></a>
-          </h1>
+        <h1>
+          <a href="#"
+            ><img
+              class="logo"
+              src="./images/header_logo-removebg-preview.png"
+              alt="컴포즈 로고"
+          /></a>
+        </h1>
 
-          <nav class="gnb">
-  <!-- 1뎁스  만약 .mega-total이 여전히 li 바깥에 있다면, 이 선택자는 절대 매칭이 안 돼요. -->
-  <ul class="deapth1">
-    <li>BRAND</li>
-    <li>MENU</li>
-    <li>FRANCHISE</li>
-    <li>CONTACT</li>
-    <li>NEWS</li>
-  </ul>
+        <nav class="gnb">
+          <!-- 1뎁스  만약 .mega-total이 여전히 li 바깥에 있다면, 이 선택자는 절대 매칭이 안 돼요. -->
+          <ul class="deapth1">
+            <li>
+              BRAND
+              <div class="deapth2">
+                <a href="#">ABOUT US</a>
+                <a href="#">HISTORY</a>
+                <a href="#">STORES</a>
+                <a href="#">NEWS</a>
+              </div>
+            </li>
+            <li>MENU</li>
+            <li>FRANCHISE</li>
+            <li>CONTACT</li>
+            <li>NEWS</li>
+          </ul>
 
-  <!-- 2뎁스 (메가영역) -->
-  <div class="mega-total">
-    <div class="deapth2">
-      <a href="#">ABOUT US</a>
-      <a href="#">HISTORY</a>
-      <a href="#">STORES</a>
-      <a href="#">NEWS</a>
-    </div>
-    <div class="deapth2">
-      <a href="#">COFFEE</a>
-      <a href="#">NON-COFFEE</a>
-      <a href="#">DESSERT</a>
-      <a href="#">SEASONAL</a>
-    </div>
-    <div class="deapth2">
-      <a href="#">INQUIRY</a>
-      <a href="#">COST</a>
-      <a href="#">PROCESS</a>
-      <a href="#">STORY</a>
-    </div>
-    <div class="deapth2">
-      <a href="#">Q&A</a>
-      <a href="#">PARTNERSHIP</a>
-      <a href="#">RECRUIT</a>
-    </div>
-    <div class="deapth2">
-      <a href="#">Q&A</a>
-      <a href="#">PARTNERSHIP</a>
-      <a href="#">RECRUIT</a>
-    </div>
-  </div>
-</nav>
-
-
-          <div class="order">
-            <div class="order-inner">
-              <a
-                href="#"
-                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
-                class="btn-order"
-              >
-                <span class="order-txt-en">Login</span>
-                <span class="order-txt-kr">로그인</span>
-              </a>
-
-              <a
-                href="#"
-                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
-                class="btn-order"
-              >
-                <span class="order-txt-en">Join</span>
-                <span class="order-txt-kr">회원가입</span>
-              </a>
-
-              <a
-                href="#"
-                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
-                class="btn-order"
-              >
-                <span class="order-txt-en">Cart</span>
-                <span class="order-txt-kr">장바구니</span>
-              </a>
+          <!-- 2뎁스 (메가영역) -->
+          <div class="mega-total">
+            <!-- <div class="deapth2-wrap"> -->
+            <!-- <div class="deapth2">
+              <a href="#">ABOUT US</a>
+              <a href="#">HISTORY</a>
+              <a href="#">STORES</a>
+              <a href="#">NEWS</a>
+            </div> -->
+            <div class="deapth2">
+              <a href="#">COFFEE</a>
+              <a href="#">NON-COFFEE</a>
+              <a href="#">DESSERT</a>
+              <a href="#">SEASONAL</a>
             </div>
-            <!-- .order-inner end-->
+            <div class="deapth2">
+              <a href="#">INQUIRY</a>
+              <a href="#">COST</a>
+              <a href="#">PROCESS</a>
+              <a href="#">STORY</a>
+            </div>
+            <div class="deapth2">
+              <a href="#">Q&A</a>
+              <a href="#">NON-COFFEE</a>
+              <a href="#">RECRUIT</a>
+            </div>
+            <div class="deapth2">
+              <a href="#">Q&A</a>
+              <a href="#">NON-COFFEE</a>
+              <a href="#">RECRUIT</a>
+            </div>
+            <!-- </div> -->
+            <!-- deapth2-wrap end -->
           </div>
+        </nav>
+
+        <div class="order">
+          <div class="order-inner">
+            <a
+              href="#"
+              onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+              class="btn-order"
+            >
+              <span class="order-txt-en">Login</span>
+              <span class="order-txt-kr">로그인</span>
+            </a>
+
+            <a
+              href="#"
+              onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+              class="btn-order"
+            >
+              <span class="order-txt-en">Join</span>
+              <span class="order-txt-kr">회원가입</span>
+            </a>
+
+            <a
+              href="#"
+              onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+              class="btn-order"
+            >
+              <span class="order-txt-en">Cart</span>
+              <span class="order-txt-kr">장바구니</span>
+            </a>
+          </div>
+          <!-- .order-inner end-->
+        </div>
       </header>
 
       <!-- aside 추가 -->
