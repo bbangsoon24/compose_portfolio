@@ -15,11 +15,15 @@
 
     <script src="js/jquery.js"></script>
     <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/modal.js"></script>
     <link rel="stylesheet" href="css/jquery.bxslider.min.css" />
+    <link rel="stylesheet" href="css/modal.css" />
     <style>
       * {
         margin: 0;
         padding: 0;
+        text-decoration: none;
+        color: #111;
         text-decoration: none;
         color: #111;
       }
@@ -980,6 +984,14 @@
         </div>
         <!-- .contents_wrap end -->
       </footer>
+    </div>
+    <div id="modal" class="modal">
+      <img src="./images/popup.png" alt="팝업" class="popup" />
+      <button class="popupclose">X</button>
+      <div class="todaydiv">
+        <input type="checkbox" class="todayclose" />
+        <span>1일 동안 다시보지 않기</span>
+      </div>
     </div>
     <script>
       const header = document.getElementById("header");
