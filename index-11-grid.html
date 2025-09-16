@@ -1,0 +1,1099 @@
+ <!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>컴포즈커피</title>
+    <meta name="generator" content="windows notepad" />
+    <meta
+      name="keywords"
+      content="프론트엔드 디자인,웹디자인,uxui디자인,uiux디자인,웹퍼블리셔,html,css,포토샵,일러스트,피그마,javascript,jquery,포트폴리오"
+    />
+    <meta
+      name="description"
+      content="안녕하세요! 프론트엔드 디자이너 입사지원자 강혜경입니다. 프로토타입 포트폴리오 웹사이트입니다."
+    />
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.bxslider.min.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        color: #111;
+        font-family: "맑은 고딕", MalgunGothic, sans-serif;
+      }
+      li {
+        list-style: none;
+      }
+
+      #wrapper {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      /* header 시작*/
+
+      header {
+        width: 100%;
+        height: 90px;
+		box-sizing: border-box;
+
+
+		
+		
+
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        /*left: 0px;*/
+        /*right: 0;*/
+        z-index: 100;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        transition: background 0.4s ease, color 0.4s ease;
+      }
+
+      header.scrolled {
+        background: rgba(255, 255, 255); /* 반투명 검정 */
+        transition: background 0.4s ease, color 0.4s ease;
+      }
+
+      header.scrolled .txt-en {
+        color: #111;
+      }
+
+      header.scrolled .order-txt-en {
+        color: #111;
+      }
+
+      h1 {
+        width: 100%; /*자식의 크기 지정*/
+        height: 90px;
+      }
+	  
+	  h1 a {
+		display: block;        /* a를 블록화 */
+		width: 100%;
+		height: 100%;
+	 }
+
+      h1 .logo {
+        width: 100%; /*자식의 크기 지정*/
+        height: 90px;
+      }
+
+      /* GNB (1뎁스) */
+      /* 기본 레이아웃 */
+
+	 /* GNB: 1뎁스 줄과 패널의 기준 == 거실 */
+.gnb{
+
+  width: 100%;
+  height: 90px;
+  
+  display:grid;
+  grid-template-columns:repeat(5, 14%);  /*5등분*/
+  
+  justify-content: center;
+  justify-items: center;
+  align-items:center;
+  
+  background:pink;
+}
+
+/* 1뎁스 라인 */
+.deapth1{
+  display:contents;  /*ul을 투명으로 만들고 li만 grid 아이템?*/
+}
+.deapth1 li{
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  padding:8px 4px;
+  text-align:center;
+  font-size:15px;
+  
+  position:relative;
+}
+
+.deapth1 li::after{
+	content: "";
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	height:2px;
+	
+	background:white;
+}
+
+
+
+/* 메가 패널 == 안방 */
+.mega-total{
+  position: absolute;
+  left: 0;                 /* gnb와 좌측 정렬 */
+  top: 100%;               /* gnb 바로 아래 */
+  width: 100%;             /* gnb 폭과 동일 */
+  height:200px;
+  
+  background:rgba(255, 193, 7, 0.9);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);   /*패널을 시작할 때 8px 위에 숨겨놓아서 스르르 열릴 수 있게 만듦*/
+  transition: 0.8s ease;
+  z-index: 200;
+  
+  display:grid;
+  grid-template-columns: repeat(5, 8%); /* 5등분 */
+  
+  justify-content: center;
+  justify-items: center;
+}
+.gnb:hover .mega-total{
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+
+.deapth2{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align:center;
+
+  transition:1s;
+  
+  /*width:50%;
+  height:100%; */
+
+}
+
+/* 2뎁스 링크 (선택자 수정!) */
+.deapth2 a{
+  display: block;
+  padding: 8px 10px;
+  color: #111;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size:13px;
+  
+    transition:0.5s;
+  
+}
+.deapth2 a:hover{
+  /*background: rgba(0,0,0,.06);*/
+  color:white;
+  font-weight:bold;
+  
+      transition:0.3s;
+}
+
+
+
+      /* 주문 버튼 (헤더 우측 정중앙) */
+
+      .order {
+        width: 100%;
+        height: 90px;
+
+  position: relative;                /* 패널 기준점 */
+
+
+      }
+
+      .order .order-inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        width: 90%;
+        height: 85px;
+		
+		position:absolute;
+
+      }
+
+      .order .btn-order {
+        display: inline-block;
+
+        width: 60px;
+        text-decoration: none;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        transition: 0.45s;
+
+        padding: 10px 5px;
+
+        text-align: center;
+
+        margin-left: 5px;
+
+        transform: translateX(30px);
+      }
+      .order .btn-order:hover .order-txt-en,
+      .order-txt-kr {
+        color: #fdd22b;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .order .btn-order .order-txt-en {
+        display: inline; /* 얘가 기본화면 */
+      }
+      .order .btn-order .order-txt-kr {
+        display: none; /* 얘가 기본화면 */
+      }
+
+      .order .btn-order:hover {
+        color: #fdd22b;
+      }
+
+      .order .btn-order:hover .order-txt-en {
+        display: none; /* 얘가 변한 화면 */
+      }
+      .order .btn-order:hover .order-txt-kr {
+        display: inline; /* 얘가 변한 화면 */
+      }
+
+      /* header end */
+
+      /*aside 시작*/
+      aside {
+        width: 120px;
+        height: 450px;
+        /* background:pink;  */
+        background: #1d1d1d;
+
+        position: fixed;
+        z-index: 1000;
+        left: 20px;
+        top: 125px;
+
+        border-radius: 10px;
+      }
+
+      .aside_box {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+      }
+
+      .aside_box ul {
+        width: 100px;
+        height: 100%;
+
+        position: absolute;
+        left: 50%;
+        top: 8px;
+        transform: translateX(-50%);
+      }
+
+      .aside_box ul li {
+        position: relative; /* li::after 기준점 */
+        margin-bottom: 10px;
+      }
+
+      .aside_box ul li::after {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 80%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2); /* 밑줄 색 */
+      }
+
+      .aside_box li:last-child::after {
+        display: none;
+      }
+
+      .aside_box li a {
+        text-align: center;
+        font-size: 13px;
+        color: white;
+
+        text-decoration: none;
+        letter-spacing: -1px;
+
+        font-weight: 300px;
+      }
+
+      .aside_box ul li a:hover {
+        color: #fdd22b;
+        font-weight: bold;
+      }
+
+      .aside_box img {
+        width: 60%;
+        height: 100%;
+
+        position: relative;
+        left: 20px;
+
+        display: block;
+        border-radius: 50%; /* 이미지 동그랗게 만들면 테두리랑도 상관 없어짐*/
+      }
+
+      .aside_box .aside-pa {
+        padding-bottom: 20px;
+      }
+      .aside_box p {
+        line-height: 1.5;
+      }
+
+      /*aside 끝*/
+
+      /* 섹션 시작 */
+      #slide1 {
+        width: 100%;
+        height: 955px;
+        overflow: hidden;
+        position: relative;
+      }
+      .intro_Video {
+        width: 100%;
+        height: 100%;
+      }
+      .intro_Video video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      #slide1 .contents_wrap {
+        position: relative;
+      }
+      #slide1 .text_box {
+        width: 50%;
+        height: 200px; /*크기*/
+        /*margin: 0 auto;       위치*/
+
+        position: absolute;
+        z-index: 10;
+        top: 160px;
+        left: 450px;
+      }
+
+      #slide1 p {
+        width: 500px;
+        height: 100px;
+        margin: 0 auto; /*박스가 가운데 정렬*/
+        text-align: center; /*박스 안 콘텐츠가 가운데 정렬*/
+
+        opacity: 0; /*애니메이션 시작 전에는 안 보이게 하려는 목적*/
+        animation: slideUp 1s ease-out forwards; /* forwards 마지막 프레임(100%) 상태를 유지 */
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px); /* 아래에서 시작 */
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0); /* 원래 위치 */
+        }
+      }
+
+      #slide1 p.main {
+        animation-delay: 0.3s;
+        letter-spacing: -2px;
+      }
+      #slide1 p.sub {
+        animation-delay: 0.8s;
+        letter-spacing: -1px;
+      }
+
+      .main {
+        font-weight: 900;
+        font-size: 50px;
+        color: white;
+        line-height: 100px;
+      }
+      .sub {
+        font-size: 17px;
+        color: white;
+        /*text-align: top;*/
+        line-height: 30px;
+      }
+
+      #slide1 .link {
+        width: 600px;
+        height: 120px; /*margin:0 auto; */
+        background: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        z-index: 11;
+        top: 720px;
+        right: 100px; /* margin:0 auto; */
+
+        animation: fly-in-right 1.4s ease-out 0.7s both; /* 0.7s 딜레이 후, 앞으로 고정(both) */
+        will-change: transform, opacity;
+      }
+
+      /* 1) 오른쪽에서 날아오는 키프레임 */
+      @keyframes fly-in-right {
+        0% {
+          opacity: 0;
+          transform: translate3d(220px, 0, 0); /*translateX(220px)와 동일*/
+        }
+        80% {
+          opacity: 1;
+          transform: translate3d(-8px, 0, 0);
+        } /* 살짝 넘어갔다가 */
+        100% {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        } /* 제자리 */
+      }
+
+      .link .link_box {
+        display: inline-block;
+        width: 194px;
+        height: 120px;
+        line-height: 100px;
+        margin: 0 auto;
+        border-right: 3px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .link_box:last-child {
+        border-right: none;
+      }
+
+      .link .link_box a {
+        display: inline-block;
+        text-decoration: none;
+        color: white;
+        padding-left: 20px;
+      }
+
+      .link .link_box span {
+        display: block;
+        height: 26px;
+      }
+
+      .link1 {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .link2 {
+        font-size: 20px;
+        font-weight: 900;
+        opacity: 1;
+      }
+
+      .link2:hover {
+        color: #fdd22b;
+      }
+
+      /************ long_box 시작 **********/
+
+      #slide1 .long_box {
+        position: absolute;
+        left: 50%; /*부모의 중심선에 내 왼쪽 모서리가 맞춰짐*/
+        top: 350px; /* 화면 안쪽 원하는 위치 */
+        transform: translateX(-50%); /*내 크기 절반만큼 보정하기*/
+
+        width: 900px; /*height:300px;*/ /* 내용에 맞게 */
+        /* background:rgba(0,0,0,.35); */
+        /* border-radius:12px;*/
+
+        z-index: 20; /* 영상 위로 */
+
+        display: flex; /* .map 안에 있는 .map-item들을 가로로 나란히 배치 */
+        gap: 20px; /* 아이템들 사이에 20px 간격을 줌 */
+        justify-content: center; /* 아이템들을 전체 컨테이너의 가운데로 정렬 */
+      }
+
+      #slide1 .long_box div {
+        margin-bottom: 30px;
+      }
+      #slide1 .long_box p {
+        color: #fff; /*background:pink; */
+        width: 300px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+
+      .long_box strong {
+        font-size: 32px;
+        display: inline-block; /* transform 주려면 inline-block 필수 */
+        transform: scaleY(1.2); /* 1.2배 위로 길게 */
+      }
+      .long_box span {
+        font-weight: 700;
+        margin-left: 2px;
+      }
+      #slide1 .long_box p.desc {
+        background-color: rgba(234, 168, 0, 0.5);
+        /*width:150px; height:40px;*/
+
+        line-height: 50px;
+        border-radius: 20px;
+        color: #333;
+        font-size: 15px;
+        font-weight: 530;
+      }
+
+      /************ long_box 끝 **********/
+
+      /*********** scroll 시작 ***********/
+      #slide1 .scroll {
+        width: 100px;
+        height: auto;
+
+        text-align: center;
+        color: white;
+        font-size: 17px;
+
+        z-index: 21;
+
+        position: absolute;
+        left: 50%;
+        top: 700px; /* 화면 안쪽 원하는 위치 */
+        transform: translateX(-50%);
+      }
+
+      .scroll::before {
+        content: "▼";
+        display: block;
+        font-size: 22px;
+        color: white;
+
+        animation: floatY 1s ease-in-out infinite;
+        margin-bottom: 20px; /* 텍스트와 간격 */
+      }
+
+      @keyframes floatY {
+        0% {
+          transform: translateY(6px);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+        100% {
+          transform: translateY(6px);
+        }
+      }
+
+      /*********** scroll 끝 ***********/
+
+      section {
+        width: 100%;
+        /* height: 500px;
+           background: orange;
+           margin-bottom: 5px;*/
+      }
+
+      /* 섹션2 - 이미지 슬라이더 */
+      #gallery_wrap {
+        width: 100%;
+        height: 600px;
+        display: flex;
+        overflow: hidden;
+      }
+      #gallery_wrap li {
+        flex: 0 0 100%; /* 이 아이템은 무조건 부모의 100% 너비를 차지하고, 늘어나거나 줄어들지 말라 */
+        height: 600px; /* 원하는 슬라이드 높이 (고정) */
+        position: relative;
+      }
+      #gallery_wrap img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      /*섹션2 end */
+
+      #slide3 {
+        padding: 100px 100px;
+        box-sizing: border-box;
+      }
+
+      /*섹션3 시작*/
+      #slide3 .text_box {
+        width: 100%;
+        height: 100%;
+        background: white;
+        text-align: center;
+        letter-spacing: -1px;
+
+        margin-bottom: 70px;
+      }
+
+      #slide3 .text_box h2 {
+        font-size: 40px;
+        font-weight: 560;
+      }
+
+      #slide3 .text_box .short_line {
+        width: 50px;
+        border-bottom: 1px solid #111;
+        margin: 20px auto;
+      }
+
+      #slide3 .text_box p {
+        color: #111;
+        font-size: 17px;
+        margin: 20px auto;
+      }
+
+      #slide3 .text_box a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        padding: 10px 20px;
+
+        display: block;
+        margin: 0 auto;
+        width: 150px;
+        border-radius: 5px;
+
+        background: black;
+      }
+
+      #slide3 .img_box {
+        width: 100%;
+        height: 100%;
+        /*background:pink;*/
+      }
+
+      #slide3 .li_gallery {
+        display: flex; /* .map 안에 있는 .map-item들을 가로로 나란히 배치 */
+        gap: 20px; /* 아이템들 사이에 20px 간격을 줌 */
+        justify-content: center; /* 아이템들을 전체 컨테이너의 가운데로 정렬 */
+      }
+
+      #slide3 .li_gallery li {
+        width: 100%;
+        height: auto;
+
+        background: tomato;
+      }
+
+      #slide3 .li_gallery li img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /*slide 3 end*/
+
+      /*footer 시작*/
+
+      footer .contents_wrap {
+        padding: 50px 100px;
+        box-sizing: border-box;
+
+        width: 100%;
+        height: 100%;
+        display: flex; /* .map 안에 있는 .map-item들을 가로로 나란히 배치 */
+        gap: 0px; /* 아이템들 사이에 0px 간격을 줌 */
+        justify-content: center; /* 아이템들을 전체 컨테이너의 가운데로 정렬 */
+
+        background-color: #222; /* 다크 배경 */
+        color: #bebdbd; /* 기본 텍스트 색상 */
+        font-size: 15px; /* 본문 크기 */
+        line-height: 2; /* 줄 간격 */
+      }
+      .site-footer {
+        width: 50%;
+        height: 100%;
+      }
+
+      .site-footer p,
+      .site-footer address,
+      .site-footer small {
+        margin: 4px 0; /* 요소 간격 */
+        font-style: normal;
+      }
+
+      .site-footer strong {
+        /* font-weight: 600; 상호 강조 */
+        color: #fff; /* 흰색 강조 */
+      }
+
+      .site-footer a {
+        color: #ddd;
+        text-decoration: none; /* 밑줄 제거 */
+      }
+
+      .site-footer a:hover {
+        text-decoration: underline; /* 호버 시 밑줄 */
+      }
+
+      .site-footer small {
+        display: block;
+        margin-top: 12px;
+        font-size: 12px; /* 저작권 문구는 더 작게 */
+        color: #aaa; /* 흐린 회색 */
+      }
+
+      .footer_sns {
+        width: 50%;
+        height: 100%;
+        position: relative;
+      }
+
+      .footer_sns img {
+        position: absolute;
+        top: 160px;
+        left: 460px;
+      }
+    </style>
+    <script>
+      $(function () {
+        $(".slide_gallery").bxSlider({
+          auto: true,
+          autoControls: true,
+          stopAutoOnClick: true,
+          pager: true,
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header id="header">
+          <h1>
+            <a href="#">
+			<img class="logo" src="./images/header_logo-removebg-preview.png" alt="컴포즈 로고"
+            /></a>
+          </h1>
+
+          <nav class="gnb">
+  <!-- 1뎁스  만약 .mega-total이 여전히 li 바깥에 있다면, 이 선택자는 절대 매칭이 안 돼요. -->
+  <ul class="deapth1">
+    <li>BRAND</li>
+    <li>MENU</li>
+    <li>FRANCHISE</li>
+    <li>CONTACT</li>
+    <li>NEWS</li>
+  </ul>
+
+  <!-- 2뎁스 (메가영역) -->
+  <div class="mega-total">
+    <div class="deapth2">
+      <a href="#">ABOUT US</a>
+      <a href="#">HISTORY</a>
+      <a href="#">STORES</a>
+      <a href="#">NEWS</a>
+    </div>
+    <div class="deapth2">
+      <a href="#">COFFEE</a>
+      <a href="#">NON-COFFEE</a>
+      <a href="#">DESSERT</a>
+      <a href="#">SEASONAL</a>
+    </div>
+    <div class="deapth2">
+      <a href="#">INQUIRY</a>
+      <a href="#">COST</a>
+      <a href="#">PROCESS</a>
+      <a href="#">STORY</a>
+    </div>
+    <div class="deapth2">
+      <a href="#">Q&A</a>
+      <a href="#">PARTNERSHIP</a>
+      <a href="#">RECRUIT</a>
+    </div>
+    <div class="deapth2">
+      <a href="#">Q&A</a>
+      <a href="#">PARTNERSHIP</a>
+      <a href="#">RECRUIT</a>
+    </div>
+  </div>
+</nav>
+
+
+          <div class="order">
+            <div class="order-inner">
+              <a
+                href="#"
+                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                class="btn-order"
+              >
+                <span class="order-txt-en">Login</span>
+                <span class="order-txt-kr">로그인</span>
+              </a>
+
+              <a
+                href="#"
+                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                class="btn-order"
+              >
+                <span class="order-txt-en">Join</span>
+                <span class="order-txt-kr">회원가입</span>
+              </a>
+
+              <a
+                href="#"
+                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                class="btn-order"
+              >
+                <span class="order-txt-en">Cart</span>
+                <span class="order-txt-kr">장바구니</span>
+              </a>
+            </div>
+            <!-- .order-inner end-->
+        </div>
+      </header>
+
+      <!-- aside 추가 -->
+
+      <aside>
+        <div class="aside_box">
+          <ul>
+            <li>
+              <a
+                href="#"
+                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+              >
+                <img src="./images/aside-01.png" alt="로고" class="img-front" />
+                <p>창업상담</p>
+                <p class="aside-pa">1899-5685</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                ><img src="./images/aside-02.png" alt="로고" />
+                <p class="aside-pa">창업상담 신청</p></a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                ><img src="./images/aside-03.png" alt="로고" />
+                <p class="aside-pa">모바일 상담</p></a
+              >
+            </li>
+            <li class="aside4">
+              <a
+                href="#"
+                onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                ><img src="./images/aside-04.png" alt="로고" />
+                <p class="aside-pa">제휴 및 제안</p></a
+              >
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <section id="slide1">
+        <div class="contents_wrap">
+          <div class="intro_Video">
+            <video
+              autoplay
+              muted
+              loop
+              class="bg_video"
+              poster="./video/black_bg.webp"
+            >
+              <source src="./video/V_COMPOSED_FULL(8MB).mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="text_box">
+            <p class="main">커피를 커피답게</p>
+            <p class="sub">진정한 커피로, 당신을 당신답게</p>
+          </div>
+          <div class="link">
+            <ul>
+              <li class="link_box">
+                <a
+                  href="#"
+                  onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                  ><span class="link1">SOCIAL NETWORK</span>
+                  <span class="link2">SNS</span></a
+                >
+              </li>
+              <li class="link_box">
+                <a
+                  href="#"
+                  onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                  ><span class="link1">COMPOSE MALL</span>
+                  <span class="link2">e-Shop</span></a
+                >
+              </li>
+              <li class="link_box">
+                <a
+                  href="#"
+                  onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+                  ><span class="link1">CONTACT US</span>
+                  <span class="link2">CONTACT</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="long_box">
+            <div>
+              <p class="years">
+                <strong class="counter" data-target="11">0</strong
+                ><span>년</span>
+              </p>
+              <p class="desc">함께한 시간</p>
+            </div>
+            <div>
+              <p class="number">
+                <strong class="counter" data-target="2998">0</strong
+                ><span>개</span>
+              </p>
+              <p class="desc">가맹점 수</p>
+            </div>
+            <div>
+              <p class="human">
+                <strong class="counter" data-target="17589812">0</strong
+                ><span>명</span>
+              </p>
+              <p class="desc">컴포저 (App 누적 가입자)</p>
+            </div>
+          </div>
+          <!-- long_box end -->
+          <div class="scroll">Scroll Down</div>
+          <!-- 가상요소 선택자 사용할 예정 -->
+        </div>
+      </section>
+
+      <section id="slide2">
+        <div class="contents_wrap">
+          <div id="gallery_wrap">
+            <ul class="slide_gallery">
+              <li><img src="images/introVisualBox_01.png" alt="상품1" /></li>
+              <li><img src="images/introVisualBox_02.png" alt="상품2" /></li>
+              <li><img src="images/introVisualBox_03.png" alt="상품3" /></li>
+              <li><img src="images/introVisualBox_04.png" alt="상품4" /></li>
+              <li><img src="images/introVisualBox_05.png" alt="상품5" /></li>
+              <li><img src="images/introVisualBox_06.png" alt="상품6" /></li>
+              <li><img src="images/introVisualBox_07.png" alt="상품7" /></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="slide3">
+        <div class="contents_wrap">
+          <div class="text_box">
+            <h2>컴포즈커피 가맹점</h2>
+            <div class="short_line"></div>
+            <p>늘 가까이 함께 하겠습니다.</p>
+            <a href="#">가까운 매장 찾기</a>
+          </div>
+          <!-- text_box end -->
+          <div class="img_box">
+            <ul class="li_gallery">
+              <li><img src="./images/slide3_img1.png" alt="슬라이드1" /></li>
+              <li><img src="./images/slide3_img2.png" alt="슬라이드1" /></li>
+              <li><img src="./images/slide3_img3.png" alt="슬라이드1" /></li>
+              <li><img src="./images/slide3_img1.png" alt="슬라이드1" /></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="contents_wrap">
+          <div class="site-footer">
+            <p>상호 : 주식회사 컴포즈커피</p>
+
+            <address>
+              <p>
+                서울센터 : 서울시 성동구 성수일로 12길 26 서울숲 코리아 IT 센터
+                11층
+              </p>
+              <p>
+                부산센터 : 부산광역시 해운대구 센텀중앙로 48, 에이스하이테크21
+                812-814
+              </p>
+              <p>
+                TEL: <a href="tel:18995685">1899-5685</a> / FAX: 02-5236-9635 /
+                e-mail:
+                <a href="mailto:compose@composecoffee.com"
+                  >compose@composecoffee.com</a
+                >
+              </p>
+            </address>
+
+            <p>
+              사업자등록번호 : 521-81-02386 / 통신판매업신고증 :
+              제2024-부산해운대-1106호 / 대표 : 김홍석
+            </p>
+
+            <small>© 2021. COMPOSECOFFEE. ALL RIGHTS RESERVED.</small>
+          </div>
+          <!-- .site-footer end-->
+
+          <div class="footer_sns">
+            <a
+              href="#"
+              onclick="window.alert('패스트 프로토타입 제작\n 작업 예정입니다');"
+              ><img src="./images/sns_4gae.png" alt="sns 4종"
+            /></a>
+          </div>
+        </div>
+        <!-- .contents_wrap end -->
+      </footer>
+    </div>
+    <script>
+      const header = document.getElementById("header");
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+      function animateCounter(el) {
+        const target = +el.getAttribute("data-target"); // 목표 숫자
+        let current = 0;
+        const duration = 3000; // 전체 시간(ms)
+        const stepTime = 20; // 숫자 변경 간격(ms)
+        const increment = target / (duration / stepTime);
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = Math.floor(current).toLocaleString();
+        }, stepTime);
+      }
+
+      document.querySelectorAll(".counter").forEach(animateCounter);
+    </script>
+  </body>
+</html>
+
+<!-- [ 추가 & 수정 볼 부분 정리 ]
+
+1. 헤더 고정값 아래로 스크롤 할 때 배경색이랑 글자색 바꾸기
+
+2. 오른쪽 사이드에 고정 스크롤바 하나 만들기 (X)
+
+3. 브라우저 열자마자 뜨는 팝업창(알림창) 만들기 + 하루동안 보지않기
+
+4. 헤더바에 utility 메뉴바 좀 더 추가 시키기
+
+5. 섹션 슬라이드 2~3개 정도 추가하기 (이미지 구해야함)
+
+6. 화면 크기 꽉차게 변경
+
+7. 숫자 변하는 애니메이션 추가하기(호준)
+
+8. 슬라이드 화살표 내거로 바꾸기
+
+9. 푸터 정리하기
+
+10. 로그인 인터페이스랑 서브 페이지 하나 만들기
+ -->

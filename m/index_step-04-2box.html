@@ -1,0 +1,695 @@
+<!DOCTYPE html><!-- HTML5 / DTD 선언문 -->
+<html lang="ko">
+  <head>
+  <title>smartMobile_uiDesign / templateModuleSource</title>
+  <meta charset="UTF-8"><!-- 3. 문자표현(인코딩 설정) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- 모바일 필수 소스-->
+
+<link rel="stylesheet" href="./css/mobile.min.css">
+<style>
+/*-------------------------------*/
+/*           VARIABLES           */
+/*-------------------------------*/
+
+
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+.nav .open > a { background-color: transparent; }
+
+.nav .open > a:hover { background-color: transparent; }
+
+.nav .open > a:focus { background-color: transparent; }
+
+/*-------------------------------*/
+/*           Wrappers            */
+/*-------------------------------*/
+
+#wrapper {
+ 
+  padding-left: 0;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled { padding-left: 220px; }
+
+#wrapper.toggled #sidebar-wrapper { width: 220px; }
+
+#wrapper.toggled #page-content-wrapper {
+  margin-right: -220px;
+  position: absolute;
+}
+
+#sidebar-wrapper {
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+                                         background: #1a1a1a;
+                                                                    height: 100%;
+  left: 220px;
+  margin-left: -220px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  width: 0;
+  z-index: 1000;
+}
+#sidebar-wrapper::-webkit-scrollbar {
+ display: none;
+}
+
+#page-content-wrapper {
+  padding-top: 70px;
+  width: 100%;
+}
+
+
+/*-------------------------------*/
+/*     Sidebar nav styles        */
+/*-------------------------------*/
+
+.sidebar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 220px;
+}
+
+.sidebar-nav li {
+  display: inline-block;
+  line-height: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-nav li:before {
+  -moz-transition: width 0.2s ease-in;
+  -ms-transition: width 0.2s ease-in;
+  -webkit-transition: width 0.2s ease-in;
+  background-color: #1c1c1c;
+  content: '';
+                                                                       height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 3px;
+  z-index: -1;
+}
+
+.sidebar-nav li:first-child a {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.sidebar-nav li:nth-child(2):before { background-color: #52418a; }
+
+.sidebar-nav li:nth-child(3):before { background-color: #5c499c; }
+
+.sidebar-nav li:nth-child(4):before { background-color: #6651ad; }
+
+.sidebar-nav li:nth-child(5):before { background-color: #7562b5; }
+
+.sidebar-nav li:nth-child(6):before { background-color: #8473be; }
+
+.sidebar-nav li:nth-child(7):before { background-color: #9485c6; }
+
+.sidebar-nav li:nth-child(8):before { background-color: #a396ce; }
+
+.sidebar-nav li:nth-child(9):before { background-color: #b2a7d6; }
+
+.sidebar-nav li:hover:before {
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 100%;
+}
+
+.sidebar-nav li a {
+  color: #dddddd;
+  display: block;
+  padding: 10px 15px 10px 30px;
+  text-decoration: none;
+}
+
+.sidebar-nav li.open:hover before {
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 100%;
+}
+
+.sidebar-nav .dropdown-menu {
+  background-color: #222222;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-nav li a:hover, .sidebar-nav li a:active, .sidebar-nav li a:focus, .sidebar-nav li.open a:hover, .sidebar-nav li.open a:active, .sidebar-nav li.open a:focus {
+  background-color: transparent;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  font-size: 20px;
+  height: 65px;
+  line-height: 44px;
+}
+
+/*-------------------------------*/
+/*       Hamburger-Cross         */
+/*-------------------------------*/
+
+.hamburger {
+  background: transparent;
+  border: none;
+  display: block;
+  height: 32px;
+  margin-left: 15px;
+  position: fixed;
+  top: 20px;
+  width: 32px;
+  z-index: 999;
+}
+
+.hamburger:hover { outline: none; }
+
+.hamburger:focus { outline: none; }
+
+.hamburger:active { outline: none; }
+
+.hamburger.is-closed:before {
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transition: all 0.35s ease-in-out;
+  color: #ffffff;
+  content: '';
+  display: block;
+  font-size: 14px;
+  line-height: 32px;
+  opacity: 0;
+  text-align: center;
+  width: 100px;
+}
+
+.hamburger.is-closed:hover before {
+  -webkit-transform: translate3d(-100px, 0, 0);
+  -webkit-transition: all 0.35s ease-in-out;
+  display: block;
+  opacity: 1;
+}
+
+.hamburger.is-closed:hover .hamb-top {
+  -webkit-transition: all 0.35s ease-in-out;
+  top: 0;
+}
+
+.hamburger.is-closed:hover .hamb-bottom {
+  -webkit-transition: all 0.35s ease-in-out;
+  bottom: 0;
+}
+
+.hamburger.is-closed .hamb-top {
+  -webkit-transition: all 0.35s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.7);
+  top: 5px;
+}
+
+.hamburger.is-closed .hamb-middle {
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-top: -2px;
+  top: 50%;
+}
+
+.hamburger.is-closed .hamb-bottom {
+  -webkit-transition: all 0.35s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.7);
+  bottom: 5px;
+}
+
+.hamburger.is-closed .hamb-top, .hamburger.is-closed .hamb-middle, .hamburger.is-closed .hamb-bottom, .hamburger.is-open .hamb-top, .hamburger.is-open .hamb-middle, .hamburger.is-open .hamb-bottom {
+  height: 4px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.hamburger.is-open .hamb-top {
+  -webkit-transform: rotate(45deg);
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.73, 1, 0.28, 0.08);
+  background-color: #ffffff;
+  margin-top: -2px;
+  top: 50%;
+}
+
+.hamburger.is-open .hamb-middle {
+  background-color: #ffffff;
+  display: none;
+}
+
+.hamburger.is-open .hamb-bottom {
+  -webkit-transform: rotate(-45deg);
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.73, 1, 0.28, 0.08);
+  background-color: #ffffff;
+  margin-top: -2px;
+  top: 50%;
+}
+
+.hamburger.is-open:before {
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transition: all 0.35s ease-in-out;
+  color: #ffffff;
+  content: '';
+  display: block;
+  font-size: 14px;
+  line-height: 32px;
+  opacity: 0;
+  text-align: center;
+  width: 100px;
+}
+
+.hamburger.is-open:hover before {
+  -webkit-transform: translate3d(-100px, 0, 0);
+  -webkit-transition: all 0.35s ease-in-out;
+  display: block;
+  opacity: 1;
+}
+
+/*-------------------------------*/
+/*          Dark Overlay         */
+/*-------------------------------*/
+
+.overlay {
+  position: fixed;
+  display: none;
+                              width: 100%;
+                              height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+                               background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* SOME DEMO STYLES - NOT REQUIRED // 여기부터는 자유롭게 건들일 수 있음 */
+body, html {
+                                               height: 100%;    /* 3000px -> 100%로 변경 */
+  background-color: #fff;
+}
+
+body h1, body h2, body h3, body h4 { color: rgba(255, 255, 255, 0.9); }
+
+body p, body blockquote { color: rgba(255, 255, 255, 0.7); }
+
+body a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: underline;
+}
+
+body a:hover { color: #ffffff; }
+
+
+/************************* add css ******************************/
+header{
+    width:430px; /*아이폰 사이즈*/
+	height:70px;
+	background:pink;
+	                            /* 위에 뜨는 여백 해결*/
+	                                margin-top:-20px;
+}
+
+h1{  /*추후 대표 로고 이미지 삽입하기*/
+     width:430px;
+	 height:70px;
+	 
+	 text-align:center;
+	 line-height:70px;
+}
+
+#container{
+   width:430px;
+   /*height:3000px; */
+   background:red;
+                                     /* 위아래 여백 주는 용도 */
+                                          margin-top:50px;
+										  
+    overflow:hidden;    /* 마지막 플롯 박스 해제 */
+}
+
+#container h2{
+    width:100%;
+	height:30px;
+	background:tan;
+	
+	text-align:center;
+	line-height:30px;
+	font-size:18px;
+	color:#111;
+}
+
+#contents1{
+    width:100%;
+	height:250px;  /*나중에 동영상 넣어보고 수정*/
+	background:green;
+	                                     /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents2{ 
+    width:100%;
+	height:250px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+#contents2 h3{ font-size:17px; text-align:center; }
+
+#contents3{   /* 이미지를 두 개 넣고 싶을 때: 3번 박스랑 짝으로 해서 플롯 OR html로 가서 박스 두 개 만들어오기 */
+    width:100%;
+	height:400px;  /*나중에 이미지 넣어보고 수정*/
+	background:green;
+	                          /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+	
+	overflow:hidden;
+}
+#contents3 h3{ font-size:17px; text-align:center; margin-top:0px; margin-bottom:40px; }
+
+#contents3 .newproduct1{
+    float:left;
+
+    width:210px;
+	height:100%;   /* 280px */
+	background:yellow;
+}
+#contents3 .newproduct2{
+    float:right;
+
+    width:210px;
+	height:100%;    /* 280px */
+	background:yellow;
+}
+
+
+#contents4{ 
+    width:100%;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+#contents4 h3{ font-size:17px; text-align:center; }
+
+#h3-list{
+    width:100%;
+	height:60px;
+	background:gold;
+	
+	text-align:center;
+    line-height:60px;
+	font-size:17px;
+
+}
+#contents5{      /* 양옆 거터는 이미지를 작게 넣거나,, 가운데를 기점으로 양쪽 여백 주기 */
+    float:left;
+
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents6{ 
+    float:left;
+	margin-left:10px; margin-right:10px;  /*가운데를 기점으로 양쪽 여백 주기*/
+
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents7{ 
+    float:left;
+
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents8{ 
+    float:left;
+    clear:both;
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents9{ 
+    float:left;
+	margin-left:10px; margin-right:10px;  /*가운데를 기점으로 양쪽 여백 주기*/
+	
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents10{ 
+    float:left;
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents11{ 
+    float:left;
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents12{ 
+    float:left;
+	margin-left:10px; margin-right:10px;  /*가운데를 기점으로 양쪽 여백 주기*/
+	
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents13{ 
+    float:left;
+    width:136.6666px;
+	height:280px;  
+	background:green;
+	                            /*위아래 사이 거터를 많이 주는 게 일반적 + 일관성 있게*/
+	                                                  margin-bottom:60px;
+}
+
+#contents14{ 
+    clear:both;
+    float:left;
+	
+    width:210px;
+	height:240px;  
+	background:green;
+}
+
+#contents15{ 
+    float:right;
+    width:210px;
+	height:240px;  
+	background:green;
+}
+
+
+footer{
+   width:430px;
+   height:150px;
+   background:black;
+   
+   
+}
+
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">
+
+     <header>
+	   <h1>h1_logo</h1>
+	 </header>
+
+	 <section id="container">
+	    <h2>h2_제목</h2>
+		
+		<div id="contents1">
+		    contents1
+		</div>
+		
+		<div id="contents2">
+		    <h3>contents2</h3>
+		</div>
+		
+		<div id="contents3">
+		    <h3>contents3</h3>
+			
+			<div class="newproduct1">
+			contents3 - newproduct1
+			</div>
+			<div class="newproduct2">
+			contents3 - newproduct2
+			</div>
+		</div>
+		
+		<div id="contents4">
+		    <h3>contents4</h3>
+		</div>
+		
+		<h3 id="h3-list">상품리스트 5~13</h3>  <!-- gnb랑 연동되는 마이크로 링크 때문에 id명을 준 거임 -->
+		<div id="contents5">
+		    contents5
+		</div>
+		<div id="contents6">
+		    contents6
+		</div>
+		<div id="contents7">
+		    contents7
+		</div>
+		<div id="contents8">
+		    contents8
+		</div>
+		<div id="contents9">
+		    contents9
+		</div>
+		<div id="contents10">
+		    contents10
+		</div>
+		<div id="contents11">
+		    contents11
+		</div>
+		<div id="contents12">
+		    contents12
+		</div>
+		<div id="contents13">
+		    contents13
+		</div>
+		
+		
+		<div id="contents14">
+		    contents14
+		</div>
+		<div id="contents15">
+		    contents15
+		</div>
+		
+	 </section>	   
+
+	 <footer>
+	 footer
+	 </footer>
+
+  <div class="overlay"></div><!-- 반투명창 -->
+
+  <!-- Sidebar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+    <ul class="nav sidebar-nav">
+      <li class="sidebar-brand"> <a href="#"> Smart Mobile UI </a> </li>
+      <li> <a href="#"> Home</a> </li>
+      <li> <a href="#contents1">contents1</a> </li>
+      <li> <a href="#contents2">contents2</a> </li>
+      <li> <a href="#contents3">contents3</a> </li>
+      <li> <a href="#h3-list">상품리스트 5~12</a> </li>
+	  <!-- 투뎁스 메뉴 
+      <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="dropdown-header">Dropdown heading</li>
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li><a href="#">Separated link</a></li>
+          <li><a href="#">One more separated link</a></li>
+        </ul>
+      </li>
+	  -->
+      <li> <a href="#">Page four</a> </li>
+      <li> <a href="#">Page 5</a> </li>
+      <li> <a href="#">Last page</a> </li>
+    </ul>
+  </nav>
+  <!-- /#sidebar-wrapper --> <!-- 1뎁스 OR 2뎁스 -->
+  
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas"> <span class="hamb-top"></span> <span class="hamb-middle"></span> <span class="hamb-bottom"></span> </button><!-- 3지창 -->
+  </div>
+  <!-- /#page-content-wrapper --> 
+  
+
+</div><!-- /#wrapper --> 
+
+<script src="./js/jquery.min.js"></script> 
+<script src="./js/mobile.min.js"></script>
+
+<script>
+$(document).ready(function () {
+  var trigger = $('.hamburger'),
+      overlay = $('.overlay'),
+     isClosed = false;
+
+    trigger.click(function () {
+      hamburger_cross();      
+    });
+
+    function hamburger_cross() {
+
+      if (isClosed == true) {          
+        overlay.hide();
+        trigger.removeClass('is-open');
+        trigger.addClass('is-closed');
+        isClosed = false;
+      } else {   
+        overlay.show();
+        trigger.removeClass('is-closed');
+        trigger.addClass('is-open');
+        isClosed = true;
+      }
+  }
+  
+  $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+  });  
+});
+</script>
+</body>
+</html>
+<!-- /*/templateModule_renewalUpdate_uxuiDesign_Coding / v220524_v240522
+//YoonSemCom [윤샘컴교실] edyoon.tistory.com /////////////////////*/ -->
+

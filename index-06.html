@@ -77,69 +77,97 @@
 
       /* GNB (1뎁스) */
       /* 기본 레이아웃 */
-      .menu {
+
+	  .gnb{
+	     width:50%;
+		 height:50%;
+
+		 margin:0px auto;
+		 position:absolute;
+		 left:50%;
+		 top:50%;
+		 transform: translate(-50%, -70% );
+	  }
+       .deapth1 {
         display: flex;
-        gap: 40px;
+        gap: 30px;
         justify-content: center;
         align-items: center;
         height: 64px;
+
         list-style: none;
       }
-      .menu li {
+      .deapth1 li {
         color: #fff;
         font-weight: 700;
         cursor: pointer;
         padding: 8px 4px;
+
+		position:relative;
+
       }
 
       /* 메가박스: 기본 숨김 */
-      .mega {
+      .mega-total {
         position: absolute;
-        left: 0;
+        left: -50%;
         top: 100%;
-        width: 100%;
+        width: 1600px;
+		height:400px;
+		
         opacity: 0;
         visibility: hidden;
         transform: translateY(-8px);
         transition: 0.2s ease;
       }
-      .mega .inner {
-        max-width: 1200px;
+      .mega-inner {
+        max-width: 1600px;
+		height:400px;
         margin: 0 auto;
         padding: 24px;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
-        background: linear-gradient(180deg, #2a3f6e 0%, #1f2f56 100%);
+
+       .mega-inner{
+  display: flex;
+  flex-direction: column; /* 🔴 세로로 쌓기 */       flex-wrap: wrap;   다음 줄로 넘어가게 */
+  gap: 50px;         /* Grid의 gap처럼 간격 */
+  box-sizing: border-box;
+}
+
+/* 4열 고정: 한 줄에 4개 */
+.mega-inner > *{
+  flex: 0 0 calc((100% - 3 * 24px) / 4); /* (전체폭 - 간격합) / 4 */
+}
+        background: white;
         border-radius: 16px;
       }
-      .mega .col a {
+
+      .mega .deapth2 a {
         display: block;
         padding: 8px 10px;
-        color: #fff;
+        color: #000;
         text-decoration: none;
       }
-      .mega .col a:hover {
+      .mega .deapth2 a:hover {
         background: rgba(255, 255, 255, 0.15);
         border-radius: 8px;
       }
 
       /* hover 시 열림 */
-      .gnb:hover .mega {
+      .gnb:hover .mega-total {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
       }
 
       /* li ↔ col 매칭 (옵션) */
-      .mega .col {
+      .mega-total .deapth2 {
         opacity: 0.5;
         transition: 0.2s;
       }
-      .gnb:has(.menu > li:nth-child(1):hover) .mega .col:nth-child(1),
-      .gnb:has(.menu > li:nth-child(2):hover) .mega .col:nth-child(2),
-      .gnb:has(.menu > li:nth-child(3):hover) .mega .col:nth-child(3),
-      .gnb:has(.menu > li:nth-child(4):hover) .mega .col:nth-child(4) {
+      .gnb:has(.deapth1 > li:nth-child(1):hover) .mega-total .deapth2:nth-child(1),
+      .gnb:has(.deapth1 > li:nth-child(2):hover) .mega-total .deapth2:nth-child(2),
+      .gnb:has(.deapth1 > li:nth-child(3):hover) .mega-total .deapth2:nth-child(3),
+      .gnb:has(.deapth1 > li:nth-child(4):hover) .mega-total .deapth2:nth-child(4) {
         opacity: 1;
       }
 
@@ -156,7 +184,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 20x;
+        gap: 20px;
 
         width: 100%;
         height: 85px;
@@ -718,7 +746,7 @@
 
           <nav class="gnb">
             <!-- 1뎁스 -->
-            <ul class="menu">
+            <ul class="deapth1">
               <li>BRAND</li>
               <li>MENU</li>
               <li>FRANCHISE</li>
@@ -726,33 +754,33 @@
             </ul>
 
             <!-- 2뎁스 (메가영역) -->
-            <div class="mega">
-              <div class="inner">
-                <div class="col">
+            <div class="mega-total">
+              <div class="mega-inner">
+                <div class="deapth2">
                   <a href="#">ABOUT US</a>
                   <a href="#">HISTORY</a>
                   <a href="#">STORES</a>
                   <a href="#">NEWS</a>
                 </div>
-                <div class="col">
+                <div class="deapth2">
                   <a href="#">COFFEE</a>
                   <a href="#">NON-COFFEE</a>
                   <a href="#">DESSERT</a>
                   <a href="#">SEASONAL</a>
                 </div>
-                <div class="col">
+                <div class="deapth2">
                   <a href="#">INQUIRY</a>
                   <a href="#">COST</a>
                   <a href="#">PROCESS</a>
                   <a href="#">STORY</a>
                 </div>
-                <div class="col">
+                <div class="deapth2">
                   <a href="#">Q&A</a>
                   <a href="#">PARTNERSHIP</a>
                   <a href="#">RECRUIT</a>
                 </div>
-              </div>
-            </div>
+              </div><!-- .mega-inner end -->
+            </div><!-- .mega-total end -->
           </nav>
 
           <div class="order">
@@ -1037,6 +1065,6 @@
 8. 슬라이드 화살표 내거로 바꾸기
 
 9. 푸터 정리하기
- 
+
 10. 로그인 인터페이스랑 서브 페이지 하나 만들기
  -->
